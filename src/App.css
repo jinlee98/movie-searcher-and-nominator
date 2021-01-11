@@ -102,14 +102,17 @@ h4{
   margin-bottom: 20px;
 }
 .searchResultDiv h3 {
-  color: black;
+  color: #414141;
   margin-top: 35px;
+  font-weight: 400;
+  font-size: 21px;
 }
 .searchResultDiv h3 a {
   color: #1a0dab;
   display: inline-block;
   line-height: 16px;
   text-decoration: none;
+  font-weight: 600;
 }
 .searchResultDiv h3 a:hover {
   border-bottom: 3px solid;

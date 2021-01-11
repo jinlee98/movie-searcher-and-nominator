@@ -55,7 +55,9 @@ class App extends React.Component {
                     year: response.Year,
                     imdbURL: imdbURL + response.imdbID,
                     plot: response.Plot,
-                    rating: response.imdbRating
+                    rating: response.imdbRating,
+                    genre: response.Genre,
+                    director: response.Director,
                   })                 
                   pointerToThis.forceUpdate();
                 }
@@ -86,7 +88,9 @@ class App extends React.Component {
             ></path>
           </svg>
           </button>
-          <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a></h3>
+          <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a> : {this.state.movieSearchReturnValues[key3].genre}</h3>
+          <p> Director(s): {this.state.movieSearchReturnValues[key3].director}</p>
+            <div></div>
           <b> IMDb Rating: {this.state.movieSearchReturnValues[key3].rating}/10</b>
           <p>({this.state.movieSearchReturnValues[key3].year})</p>
           <p className="description" dangerouslySetInnerHTML={{__html: this.state.movieSearchReturnValues[key3].plot}}></p>
