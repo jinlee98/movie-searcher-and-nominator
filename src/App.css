@@ -15,6 +15,11 @@ p.description {
   font-weight: 400;
   font-style: normal;
 }
+b{
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}
 .column1{
   float: left;
   width: 50%;
@@ -60,11 +65,7 @@ h4{
   font-size: 20px;
   margin-bottom:20px;
   font-family: 'Montserrat', sans-serif;
-}
-h5{
-  font-size: 20px;
-  margin-bottom:20px;
-  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 1px;
 }
 .App form {
   display: inline-block;
@@ -102,6 +103,7 @@ h5{
 }
 .searchResultDiv h3 {
   color: black;
+  margin-top: 35px;
 }
 .searchResultDiv h3 a {
   color: #1a0dab;
@@ -130,5 +132,6 @@ h5{
   padding: 0 20px;
   border-radius: 20px 20px 20px 20px;
   cursor: pointer;
-  margin-left: 380px;
+  float: right;
+  margin-bottom: 20px;
 }

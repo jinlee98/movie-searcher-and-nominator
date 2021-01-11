@@ -19,11 +19,9 @@ class App extends React.Component {
 
     const pointerToThis = this;
 
-    let tempArr = [];
-
-    var url = "http://www.omdbapi.com/?apikey=b3315029&s=";
+    var url = "http://www.omdbapi.com/?apikey=b3315029&type=movie&s=";
     var imdbURL = "https://www.imdb.com/title/";
-    var plotURL = "http://www.omdbapi.com/?apikey=b3315029&i=";
+    var detailedURL = "http://www.omdbapi.com/?apikey=b3315029&i=";
 
     url = url + this.state.movieSearchTerms;
 
@@ -39,35 +37,30 @@ class App extends React.Component {
       )
       .then(
         function (data) {
-          tempArr = data;
-          for (var key in tempArr.Search) {
-            return fetch(plotURL + tempArr.Search[key].imdbID);
+          for (var key in data.Search) {
+            fetch(detailedURL + data.Search[key].imdbID)
+              .then(
+                function(response) {
+                  if (response) {
+                    return response.json();
+                  } else {
+                    return Promise.reject(response);
+                  }
+                }
+              )
+              .then(
+                function(response) {
+                  pointerToThis.state.movieSearchReturnValues.push({
+                    title: response.Title,
+                    year: response.Year,
+                    imdbURL: imdbURL + response.imdbID,
+                    plot: response.Plot,
+                    rating: response.imdbRating
+                  })                 
+                  pointerToThis.forceUpdate();
+                }
+              )
           }
-        }
-      )
-      .then(
-        function(response) {
-          if (response) {
-            return response.json();
-          } else {
-            return Promise.reject(response);
-          }
-        }
-      )
-      .then(
-        function(response) {
-          // console.log(tempArr)
-          for (var key2 in tempArr.Search) {
-            if (tempArr.Search[key2].Type === "movie") {
-              pointerToThis.state.movieSearchReturnValues.push({
-                title: tempArr.Search[key2].Title,
-                year: tempArr.Search[key2].Year,
-                imdbURL: imdbURL + tempArr.Search[key2].imdbID,
-                plot: response.Plot
-              });
-            }
-          }
-          pointerToThis.forceUpdate();
         }
       )
   }
@@ -80,14 +73,10 @@ class App extends React.Component {
 
   render() {
     let movieSearchResults = [];
-    console.log(this.state.movieSearchReturnValues)
 
     for (var key3 in this.state.movieSearchReturnValues) {
       movieSearchResults.push(
         <div className="searchResultDiv" key={key3}>
-          <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a></h3>
-          <p>({this.state.movieSearchReturnValues[key3].year})</p>
-          <p className="description" dangerouslySetInnerHTML={{__html: this.state.movieSearchReturnValues[key3].plot}}></p>
           <button> Nominate
           <svg className="smallIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
             <path
@@ -97,10 +86,14 @@ class App extends React.Component {
             ></path>
           </svg>
           </button>
+          <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a></h3>
+          <b> IMDb Rating: {this.state.movieSearchReturnValues[key3].rating}/10</b>
+          <p>({this.state.movieSearchReturnValues[key3].year})</p>
+          <p className="description" dangerouslySetInnerHTML={{__html: this.state.movieSearchReturnValues[key3].plot}}></p>
         </div>
       );
     }
-    console.log(movieSearchResults)
+    //console.log(movieSearchResults)
 
     return (
       <div className="App">
@@ -143,7 +136,7 @@ class App extends React.Component {
           {movieSearchResults} 
         </div>
         <div className="column2" >
-          <h5>Nominations</h5>
+          <h4>Nominations</h4>
         </div>
       </div>
     );
