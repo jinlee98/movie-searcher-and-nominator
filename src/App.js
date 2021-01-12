@@ -7,6 +7,7 @@ class App extends React.Component {
     this.state = {
       movieSearchReturnValues: [],
       movieSearchTerms: '',
+      nominations: [],
     }
   }
   
@@ -58,13 +59,42 @@ class App extends React.Component {
                     rating: response.imdbRating,
                     genre: response.Genre,
                     director: response.Director,
-                  })                 
+                    nominated: false
+                  })            
                   pointerToThis.forceUpdate();
                 }
               )
           }
         }
       )
+  }
+
+  nominationsFull() {
+    if (this.state.nominations.length === 5) {
+      return true;
+    } else return false;
+  }
+
+  nominateMovie(movie) {
+    const pointerToThis = this;
+    if (pointerToThis.state.nominations.length === 0) {
+      pointerToThis.state.nominations.push(movie);
+      for(var key5 in pointerToThis.state.movieSearchReturnValues) {
+        if (pointerToThis.state.movieSearchReturnValues[key5] === movie) {
+          pointerToThis.state.movieSearchReturnValues[key5].nominated = true;
+        }
+      }
+    } else
+    if (pointerToThis.state.nominations.length < 5) {
+      pointerToThis.state.nominations.push(movie)
+      for(var key7 in pointerToThis.state.movieSearchReturnValues) {
+        if (pointerToThis.state.movieSearchReturnValues[key7] === movie) {
+          pointerToThis.state.movieSearchReturnValues[key7].nominated = true;
+        }
+      }
+    } else window.alert("Sorry, you can only nominate 5 movies! Please take one off your nominations list before adding another.");
+    pointerToThis.forceUpdate();
+    //console.log(this.state.nominations)
   }
 
   changemovieSearchTerms = (e) => {
@@ -74,20 +104,18 @@ class App extends React.Component {
   }
 
   render() {
+    var isFull = this.nominationsFull();
     let movieSearchResults = [];
+    let renderedNominations = [];
+    //console.log(this.state.movieSearchReturnValues)
 
     for (var key3 in this.state.movieSearchReturnValues) {
+
+      let tempVar = this.state.movieSearchReturnValues[key3]
+
       movieSearchResults.push(
         <div className="searchResultDiv" key={key3}>
-          <button> Nominate
-          <svg className="smallIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
-            <path
-              fill="#FFF"
-              d="M382.678 226.804L163.73 7.86C158.666 2.792 151.906 0 144.698 0s-13.968 2.792-19.032 7.86l-16.124 16.12c-10.492 10.504-10.492 27.576 0 38.064L293.398 245.9l-184.06 184.06c-5.064 5.068-7.86 11.824-7.86 19.028 0 7.212 2.796 13.968 7.86 19.04l16.124 16.116c5.068 5.068 11.824 7.86 19.032 7.86s13.968-2.792 19.032-7.86L382.678 265c5.076-5.084 7.864-11.872 7.848-19.088.016-7.244-2.772-14.028-7.848-19.108z"
-              transform="translate(-72.78 -19.613)"
-            ></path>
-          </svg>
-          </button>
+          <button type="submit" disabled={this.state.movieSearchReturnValues[key3].nominated} onClick={() => this.nominateMovie(tempVar)} ><span>Nominate</span></button>
           <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a> : {this.state.movieSearchReturnValues[key3].genre}</h3>
           <p> Director(s): {this.state.movieSearchReturnValues[key3].director}</p>
             <div></div>
@@ -97,10 +125,23 @@ class App extends React.Component {
         </div>
       );
     }
-    //console.log(movieSearchResults)
+    //console.log(this.state.nominations)
+
+    for (var key6 in this.state.nominations) {
+
+      renderedNominations.push(
+        <div className="searchResultDiv" key={key6}>
+          <button className="otherButton" type="submit" > Remove </button>
+          <h3>{this.state.nominations[key6].title}</h3>
+          <p> Director(s): {this.state.nominations[key6].director}</p>
+          <p>({this.state.nominations[key6].year})</p>
+        </div>
+      );
+    }
 
     return (
       <div className="App">
+        {isFull && <h5>Thanks for nominating your picks for the 2021 Shoppies!</h5>}
         <svg
           className = "icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +172,7 @@ class App extends React.Component {
         <h1>The Shoppies</h1>
         <h2>Movie Title:</h2>
         <form action="">
-          <input type="text" value={this.state.movieSearchTerms || ''} onChange={this.changemovieSearchTerms} placeholder='Search for your Shoppies Nominee' />
+          <input type="text" value={this.state.movieSearchTerms || ''} onChange={this.changemovieSearchTerms} placeholder='Search...' />
           <button type='submit' onClick={this.useMovieSearchEngine}>Search</button>
         </form>
         <div></div>
@@ -141,6 +182,7 @@ class App extends React.Component {
         </div>
         <div className="column2" >
           <h4>Nominations</h4>
+          {renderedNominations}
         </div>
       </div>
     );

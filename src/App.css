@@ -23,12 +23,12 @@ b{
 .column1{
   float: left;
   width: 50%;
-  padding:10px;
+  padding-right:20px;
 }
 .column2{
   float: right;
   width: 50%;
-  padding:10px;
+  padding-left:20px;
 }
 .App {
   width: 1100px;
@@ -65,7 +65,19 @@ h4{
   font-size: 20px;
   margin-bottom:20px;
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 1px;
+}
+h5{
+  font-size: 30px;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  background-color: orchid;
+  padding: 5px;
+  border-radius: 20px;
+  border-style: solid;
+  text-align: center;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 .App form {
   display: inline-block;
@@ -77,11 +89,14 @@ h4{
   line-height: 40px;
   border-radius: 20px 0 0 20px;
   border: none;
-  width: 400px;
+  width: 150px;
   padding: 0 20px;
   background-color: white;
+  -webkit-transition: width 0.4s ease-in-out;
+  transition: width 0.4s ease-in-out;
 }
 .App input:focus {
+  width:450px;
   outline: none;
 }
 .App button {
@@ -137,4 +152,52 @@ h4{
   cursor: pointer;
   float: right;
   margin-bottom: 20px;
+  margin-left: 10px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+.searchResultDiv button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  background-color: #008060;
+}
+.searchResultDiv button:disabled span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  background-color: grey;
+}
+.searchResultDiv button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+.searchResultDiv button:hover span {
+  padding-right: 25px;
+}
+.searchResultDiv button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+.searchResultDiv button:disabled {
+  background-color: grey;
+}
+
+.searchResultDiv2 .otherButton button {
+  line-height: 40px;
+  border: none;
+  background-color: #008060;
+  color: white;
+  padding: 0 20px;
+  border-radius: 20px 20px 20px 20px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px;
+  margin-left: 10px;
 }
