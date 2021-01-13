@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/shoppies-challenge/static/css/main.850b6a63.chunk.css",
+    "main.js": "/shoppies-challenge/static/js/main.42a05b02.chunk.js",
+    "main.js.map": "/shoppies-challenge/static/js/main.42a05b02.chunk.js.map",
+    "runtime-main.js": "/shoppies-challenge/static/js/runtime-main.6c645792.js",
+    "runtime-main.js.map": "/shoppies-challenge/static/js/runtime-main.6c645792.js.map",
+    "static/js/2.e37b66a6.chunk.js": "/shoppies-challenge/static/js/2.e37b66a6.chunk.js",
+    "static/js/2.e37b66a6.chunk.js.map": "/shoppies-challenge/static/js/2.e37b66a6.chunk.js.map",
+    "static/js/3.55a254ae.chunk.js": "/shoppies-challenge/static/js/3.55a254ae.chunk.js",
+    "static/js/3.55a254ae.chunk.js.map": "/shoppies-challenge/static/js/3.55a254ae.chunk.js.map",
+    "index.html": "/shoppies-challenge/index.html",
+    "static/css/main.850b6a63.chunk.css.map": "/shoppies-challenge/static/css/main.850b6a63.chunk.css.map",
+    "static/js/2.e37b66a6.chunk.js.LICENSE.txt": "/shoppies-challenge/static/js/2.e37b66a6.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6c645792.js",
+    "static/js/2.e37b66a6.chunk.js",
+    "static/css/main.850b6a63.chunk.css",
+    "static/js/main.42a05b02.chunk.js"
+  ]
+}
