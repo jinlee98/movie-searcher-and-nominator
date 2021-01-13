@@ -22,9 +22,9 @@ class App extends React.Component {
 
     const pointerToThis = this;
 
-    var url = "http://www.omdbapi.com/?apikey=b3315029&type=movie&s=";
+    var url = "https://www.omdbapi.com/?apikey=b3315029&type=movie&s=";
     var imdbURL = "https://www.imdb.com/title/";
-    var detailedURL = "http://www.omdbapi.com/?apikey=b3315029&i=";
+    var detailedURL = "https://www.omdbapi.com/?apikey=b3315029&i=";
 
     url = url + this.state.movieSearchTerms;
 
