@@ -100,8 +100,8 @@ class App extends React.Component {
     } else Swal.fire({
         icon: 'error',
         iconColor: '#f27474',
-        title: 'Oops...',
-        text: 'Something went wrong!',
+        title: 'Sorry...',
+        text: 'You can only nominate 5 movies! Please try again after removing some',
         background: '#ffffff'
       })
 
