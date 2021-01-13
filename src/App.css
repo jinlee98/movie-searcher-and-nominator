@@ -221,3 +221,52 @@ ul.add {
     opacity: 1;
   }
 }
+.swal2-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1.8em;
+  background-color: white;
+}
+.swal2-actions {
+  display: flex;
+  z-index: 1;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 1.25em auto 0;
+  padding: 0 1.6em;
+  background-color: white;
+}
+span.swal2-x-mark {
+  background-color: white;
+}
+div.swal2-icon.swal2-error.swal2-icon{
+  background-color: white;
+  border-color: white;
+}
+.swal2-icon.swal2-error {
+  border-color: white;
+  color: #f27474;
+}
+.swal2-title {
+  position: relative;
+  max-width: 100%;
+  margin: 0 0 .4em;
+  padding: 0;
+  color: #595959;
+  font-size: 1.875em;
+  font-weight: 600;
+  text-align: center;
+  text-transform: none;
+  word-wrap: break-word;
+  background-color: white;
+}
+div#swal2-content.swal2-html-container {
+  background-color: white;
+}
+div.swal2-content {
+  background-color: white;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import Swal from 'sweetalert2'
 
 class App extends React.Component {
   constructor(props) {
@@ -96,7 +97,13 @@ class App extends React.Component {
             pointerToThis.state.movieSearchReturnValues[key2].nominated = true;
           }
         }
-    } else window.alert("Sorry, you can only nominate 5 movies! Please take one off your nominations list before adding another.");
+    } else Swal.fire({
+        icon: 'error',
+        iconColor: '#f27474',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        background: '#ffffff'
+      })
 
     pointerToThis.forceUpdate();
   }
