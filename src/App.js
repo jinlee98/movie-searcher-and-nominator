@@ -206,7 +206,15 @@ class App extends React.Component {
         </svg>
 
         <h1>The Shoppies</h1>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+          <div>
+            {/* eslint-disable-next-line */}
+            <a target="_blank" rel="noreferrer" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fjinlee1998.github.io%2Fshoppies-challenge%2F&amp;src=sdkpreparse" class="fa fa-facebook"></a>
+            {/* eslint-disable-next-line */}
+            <a target="_blank" rel="noreferrer" href="https://twitter.com/intent/tweet?text=Check%20this%20out!&url=https://jinlee1998.github.io/shoppies-challenge/" class="fa fa-twitter"></a>
+            {/* eslint-disable-next-line */}
+            <a target="_blank" rel="noreferrer" href="http://www.linkedin.com/shareArticle?mini=true&url=https://jinlee1998.github.io/shoppies-challenge/" class="fa fa-linkedin"></a>
+          </div>
         <h2>Movie Title:</h2>
         <form action="">
           <input type="text" value={this.state.movieSearchTerms || ''} onChange={this.changemovieSearchTerms} placeholder='Search...' />
@@ -219,7 +227,6 @@ class App extends React.Component {
           <h4>Seach Results</h4>
           {movieSearchResults} 
         </div>
-
         <div className="column2" >
           <h4>Nominations</h4>
           {renderedNominations}
