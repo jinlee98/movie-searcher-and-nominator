@@ -101,7 +101,7 @@ class App extends React.Component {
         icon: 'error',
         iconColor: '#f27474',
         title: 'Sorry...',
-        text: 'You can only nominate 5 movies! Please try again after removing some',
+        text: 'You can only nominate up to 5 movies!\nPlease try again after removing some.',
         background: '#ffffff'
       })
 
