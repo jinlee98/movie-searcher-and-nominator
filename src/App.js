@@ -12,6 +12,7 @@ class App extends React.Component {
   }
   
   useMovieSearchEngine = (e) => {
+
     e.preventDefault();
 
     this.setState({
@@ -76,25 +77,47 @@ class App extends React.Component {
   }
 
   nominateMovie(movie) {
+
     const pointerToThis = this;
+
     if (pointerToThis.state.nominations.length === 0) {
       pointerToThis.state.nominations.push(movie);
-      for(var key5 in pointerToThis.state.movieSearchReturnValues) {
-        if (pointerToThis.state.movieSearchReturnValues[key5] === movie) {
-          pointerToThis.state.movieSearchReturnValues[key5].nominated = true;
+
+      for(var key in pointerToThis.state.movieSearchReturnValues) {
+        if (pointerToThis.state.movieSearchReturnValues[key] === movie) {
+          pointerToThis.state.movieSearchReturnValues[key].nominated = true;
         }
       }
-    } else
-    if (pointerToThis.state.nominations.length < 5) {
-      pointerToThis.state.nominations.push(movie)
-      for(var key7 in pointerToThis.state.movieSearchReturnValues) {
-        if (pointerToThis.state.movieSearchReturnValues[key7] === movie) {
-          pointerToThis.state.movieSearchReturnValues[key7].nominated = true;
+    } else if (pointerToThis.state.nominations.length < 5) {
+        pointerToThis.state.nominations.push(movie)
+
+        for(var key2 in pointerToThis.state.movieSearchReturnValues) {
+          if (pointerToThis.state.movieSearchReturnValues[key2] === movie) {
+            pointerToThis.state.movieSearchReturnValues[key2].nominated = true;
+          }
         }
-      }
     } else window.alert("Sorry, you can only nominate 5 movies! Please take one off your nominations list before adding another.");
+
     pointerToThis.forceUpdate();
-    //console.log(this.state.nominations)
+  }
+
+  removeNomination(movie) {
+
+    const pointerToThis = this;
+
+    for (var key in pointerToThis.state.movieSearchReturnValues) {
+      if (pointerToThis.state.movieSearchReturnValues[key] === movie) {
+        pointerToThis.state.movieSearchReturnValues[key].nominated = false;
+      }
+    }
+
+    for (var key2 in pointerToThis.state.nominations) {
+      if (pointerToThis.state.nominations[key2] === movie) {
+        pointerToThis.state.nominations.splice(key2, 1);
+      }
+    }
+
+    pointerToThis.forceUpdate();
   }
 
   changemovieSearchTerms = (e) => {
@@ -104,37 +127,42 @@ class App extends React.Component {
   }
 
   render() {
+
     var isFull = this.nominationsFull();
     let movieSearchResults = [];
     let renderedNominations = [];
-    //console.log(this.state.movieSearchReturnValues)
 
-    for (var key3 in this.state.movieSearchReturnValues) {
+    for (var key in this.state.movieSearchReturnValues) {
 
-      let tempVar = this.state.movieSearchReturnValues[key3]
+      let tempVar = this.state.movieSearchReturnValues[key]
 
       movieSearchResults.push(
-        <div className="searchResultDiv" key={key3}>
-          <button type="submit" disabled={this.state.movieSearchReturnValues[key3].nominated} onClick={() => this.nominateMovie(tempVar)} ><span>Nominate</span></button>
-          <h3><a target="_blank" rel="noreferrer" href={this.state.movieSearchReturnValues[key3].imdbURL}>{this.state.movieSearchReturnValues[key3].title}</a> : {this.state.movieSearchReturnValues[key3].genre}</h3>
-          <p> Director(s): {this.state.movieSearchReturnValues[key3].director}</p>
-            <div></div>
-          <b> IMDb Rating: {this.state.movieSearchReturnValues[key3].rating}/10</b>
-          <p>({this.state.movieSearchReturnValues[key3].year})</p>
-          <p className="description" dangerouslySetInnerHTML={{__html: this.state.movieSearchReturnValues[key3].plot}}></p>
+        <div className="searchResultDiv" key = {key}>
+          <ul className="add">
+          <button type="submit" disabled={tempVar.nominated} onClick={() => this.nominateMovie(tempVar)} ><span>Nominate</span></button>
+          <h3><a target="_blank" rel="noreferrer" href={tempVar.imdbURL}>{tempVar.title}</a> : {tempVar.genre}</h3>
+          <p> Director(s): {tempVar.director}</p>
+          <div></div>
+          <b> IMDb Rating: {tempVar.rating}/10</b>
+          <p>({tempVar.year})</p>
+          <p className="description" dangerouslySetInnerHTML={{__html: tempVar.plot}}></p>
+          </ul>
         </div>
       );
     }
-    //console.log(this.state.nominations)
 
-    for (var key6 in this.state.nominations) {
+    for (var key2 in this.state.nominations) {
+
+      let tempVar2 = this.state.nominations[key2]
 
       renderedNominations.push(
-        <div className="searchResultDiv" key={key6}>
-          <button className="otherButton" type="submit" > Remove </button>
-          <h3>{this.state.nominations[key6].title}</h3>
-          <p> Director(s): {this.state.nominations[key6].director}</p>
-          <p>({this.state.nominations[key6].year})</p>
+        <div className="searchResultDiv" key={key2}>
+          <ul className="add">
+            <button className="otherButton" type="submit" onClick={() => this.removeNomination(tempVar2)}>Remove</button>
+            <h3>{tempVar2.title}</h3>
+            <p> Director(s): {tempVar2.director}</p>
+            <p>({tempVar2.year})</p>
+          </ul>
         </div>
       );
     }
@@ -169,17 +197,22 @@ class App extends React.Component {
             d="M124.166 361.18c8.989 6.496 17.982 13.095 28.394 17.355 4.479 1.833 9.049 3.257 13.847 4.031 8.615 1.39 16.428.24 21.909-7.294 5.745-7.896 4.726-16.319.905-24.618-2.627-5.703-7.027-10.088-11.685-14.164a1345.165 1345.165 0 00-18.208-15.608c-19.831-16.728-25.971-38.429-22.478-63.301 6.09-43.363 38.335-74.347 81.947-79.659 18.748-2.284 37.14-2.101 55.257 4.017 4.067 1.373 4.472 3.029 3.173 6.77a2376.112 2376.112 0 00-16.485 49.19c-1.073 3.322-1.957 3.871-5.355 2.478-13.872-5.686-28.219-9.078-43.355-6.541-10.524 1.764-18.977 6.377-21.938 17.566-2.084 7.876.677 14.423 6.278 19.929 7.749 7.619 16.779 13.654 25.338 20.269 10.342 7.995 19.913 16.743 26.603 28.148 11.917 20.317 12.047 42.002 5.861 63.793-10.463 36.858-42.119 56.749-80.196 51.942-22.131-2.794-41.667-10.842-58.611-25.37-3.81-3.266-5.243-6.207-3.364-11.47 3.967-11.105 6.995-22.546 10.398-33.852.375-1.245.428-2.629 1.765-3.611z"
           ></path>
         </svg>
+
         <h1>The Shoppies</h1>
+
         <h2>Movie Title:</h2>
         <form action="">
           <input type="text" value={this.state.movieSearchTerms || ''} onChange={this.changemovieSearchTerms} placeholder='Search...' />
           <button type='submit' onClick={this.useMovieSearchEngine}>Search</button>
         </form>
+
         <div></div>
+
         <div className="column1"> 
           <h4>Seach Results</h4>
           {movieSearchResults} 
         </div>
+
         <div className="column2" >
           <h4>Nominations</h4>
           {renderedNominations}
